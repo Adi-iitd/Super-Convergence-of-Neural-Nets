@@ -1,2 +1,1 @@
-# Super_Convergence_Neural_Nets
-Learning Rate Finder with SGDR and CLR implementation
+# Super-Convergence: Very Fast Training of Neural Networks Using Large Learning Rates
