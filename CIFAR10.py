@@ -208,7 +208,8 @@ def wide_resblk_1(inp_ten, stride = 2, in_channels = 16, widen_factor = 2, activ
       
 #       Two convolutional layers (first one can be optional stridden convolution) in the main path with a dropout layer in between them
         with tf.variable_scope("Conv1_layer"):
-            blk_1 = conv_2d(inp_ten, 3, stride, in_channels*widen_factor, activation = activation, normalization = normalization, leak_param = leak_param); 
+            blk_1 = conv_2d(inp_ten, 3, stride, in_channels*widen_factor, activation = activation, normalization = normalization, 
+			    leak_param = leak_param); 
             blk_1 = tf.nn.dropout(blk_1, keep_prob = (1-dropout))
 
         with tf.variable_scope("Conv2_layer"):
@@ -253,7 +254,8 @@ def model(input_ten, init_out_channels = 64, normalization = 'batch', activation
     x:                 Output tensor 
     """
     
-#   Model architecture (1 conv -> 1 WR_blk_1 -> n WR_blk_2 -> 1 WR_blk_1 -> n WR_blk_2 -> 1 WR_blk_1 -> n WR_blk_2 -> Global_avg_pooling -> Dense) 
+#   Model architecture (1 conv -> 1 WR_blk_1 -> n WR_blk_2 -> 1 WR_blk_1 -> n WR_blk_2 -> 1 WR_blk_1 -> n WR_blk_2 -> Global_avg_pooling
+#                       -> Dense) 
     num_blocks = 0;
     with tf.variable_scope("Block_0"):
 
@@ -396,7 +398,8 @@ def plot_graph(learning_rate_collection, val_loss_collection, name, color):
     """
     
     pylab.plot(val_loss_collection[:len(learning_rate_collection)], color, label = name);
-    plt.xticks(range(len(learning_rate_collection)), np.around(np.log10(learning_rate_collection), decimals = 2)); pylab.legend(loc = 'upper left');
+    plt.xticks(range(len(learning_rate_collection)), np.around(np.log10(learning_rate_collection), decimals = 2)); 
+    pylab.legend(loc = 'upper left');
   
   
 def lr_mom_calculator(num_epochs, max_lr, min_lr = None, train = False):  
@@ -414,11 +417,13 @@ def lr_mom_calculator(num_epochs, max_lr, min_lr = None, train = False):
     momentum_collection:      Linear(Decr -> Incr) Momentum collection
     """
     
-    tot_iters = int(num_epochs*num_train_iters); learning_rate_collection = np.zeros(tot_iters+1); momentum_collection = np.zeros(tot_iters+1);
+    tot_iters = int(num_epochs*num_train_iters); 
+    learning_rate_collection = np.zeros(tot_iters+1); momentum_collection = np.zeros(tot_iters+1);
     if min_lr == None: min_lr = max_lr/10;
 
 #   In last few epochs, decaying the minimum learning rate to several orders of magnitude
-    thresh = min_lr/1000; max_mom = 0.95; min_mom = 0.85; num_iters_2 = int(num_epochs*num_train_iters/7.5); num_iters_1 = (tot_iters - num_iters_2)//2;
+    thresh = min_lr/1000; max_mom = 0.95; min_mom = 0.85; num_iters_2 = int(num_epochs*num_train_iters/7.5); 
+    num_iters_1 = (tot_iters - num_iters_2)//2;
     
 #   Increasing the learning rate and decreasing the momentum in the first part of the training
     for ind in range(num_iters_1):
@@ -572,8 +577,8 @@ def train(num_epochs):
                     except tf.errors.OutOfRangeError: sess.run(train_iter.initializer)  
               
 #                   Run the training step to update the parameters
-                    _, train_loss, train_acc = sess.run([train_step, loss, acc], feed_dict = {X_ph: X_train_batch, y_ph: y_train_batch, train_mode: True, 
-                    						   dropout: 0.45, lr_ph: lr_coll[(epoch-1)*num_train_iters + train_ptr], beta1_ph: mom_coll[(epoch-1)*num_train_iters + train_ptr]})
+                    _, train_loss, train_acc = sess.run([train_step, loss, acc], feed_dict = {X_ph: X_train_batch, y_ph: y_train_batch, train_mode: True, dropout: 0.45, 
+                    			       lr_ph: lr_coll[(epoch-1)*num_train_iters + train_ptr], beta1_ph: mom_coll[(epoch-1)*num_train_iters + train_ptr]})
                     tot_train_loss += train_loss; tot_train_acc += train_acc;
     
 
@@ -583,7 +588,8 @@ def train(num_epochs):
                     try: X_val_batch, y_val_batch = sess.run(next_element, feed_dict = {handle: val_handle})
                     except tf.errors.OutOfRangeError: sess.run(val_iter.initializer)
 
-                    val_loss, val_acc, summary = sess.run([loss, acc, merged], feed_dict = {X_ph: X_val_batch, y_ph: y_val_batch, train_mode: False, dropout: 0})
+                    val_loss, val_acc, summary = sess.run([loss, acc, merged], feed_dict = {X_ph: X_val_batch, y_ph: y_val_batch, 
+											    train_mode: False, dropout: 0})
                     tot_val_loss += val_loss; tot_val_acc += val_acc; 
                 
                 writer.add_summary(summary, epoch);
@@ -591,8 +597,8 @@ def train(num_epochs):
                 	', Train_acc: ' + str((tot_train_acc/(num_train_iters + 1))*100) + '%, Val_acc: ' + str(tot_val_acc/(num_val_iters + 1)*100) + '%')
 
 #               Evaluate the trained model on the test set after every 5 epochs
-#               NOTE: This is not introducing any leakage of statistics from train/Val set into the test set by any means, just evaluating 
-#                     it on the test set after every 5 epochs to have a rough idea of what's going on.
+#               NOTE: This is not introducing any leakage of statistics from train/Val set into the test set by any means,  
+#                     just evaluating it on the test set after every 5 epochs to have a rough idea of what's going on.
                 if epoch % 5 == 0:	
     
                     sess.run(test_iter.initializer); tot_test_loss = 0; tot_test_acc = 0;
@@ -600,7 +606,8 @@ def train(num_epochs):
                         try: X_test_batch, y_test_batch = sess.run(next_element, feed_dict = {handle: test_handle})
                         except tf.errors.OutOfRangeError: sess.run(test_iter.initializer)
 
-                        test_loss, test_acc = sess.run([loss, acc], feed_dict = {X_ph: X_test_batch, y_ph: y_test_batch, train_mode: False, dropout: 0}); 
+                        test_loss, test_acc = sess.run([loss, acc], feed_dict = {X_ph: X_test_batch, y_ph: y_test_batch, 
+										 train_mode: False, dropout: 0}); 
                         tot_test_loss += test_loss; tot_test_acc += test_acc;
 
                     print('Test_loss: ' + str(tot_test_loss/(num_test_iters + 1)) + ', Test_acc: ' + str(tot_test_acc/(num_test_iters + 1)))
