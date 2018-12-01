@@ -25,9 +25,8 @@ We start the pre-training with a zero or very small learning rate and then incre
 
 ![2](https://user-images.githubusercontent.com/41862477/49327191-09944400-f584-11e8-8509-ddbde585b8ee.JPG)
 
-#### Why Large learning rate is behaving like a regularizer?
-The LR range test reveals evidence of regularization through results which shows an increasing training loss and decreasing test loss while the learning rate increases from approximately 0.2 to 2.0 when training with the Cifar-10 dataset and a Resnet-56 architecture, which implies that regularization is occurring while training with these large learning rates.
-Since the definition of regularization suggests “any modification we make to a learning algorithm that is intended to reduce its generalization error”, so large learning rates should be considered as regularizing.
+##### Why large Learning rate acts like a regularizer?
+The LR range test reveals evidence of regularization through results which shows an increasing training loss and decreasing test loss while the learning rate increases from approximately 0.2 to 2.0 when training with the Cifar-10 dataset and a Resnet-56 architecture, which implies that regularization is occurring while training with these large learning rates. According to the definition, regularization is “any modification we make to a learning algorithm that is intended to reduce its generalization error”, so from here, we can conclude that large learning rate can also be considered as one of the regularization techniques.
 
 #### Bacth Size
 Earlier, small batch sizes have been recommended for regularization effects and others have shown there to be an optimal batch size on the order of 80 for Cifar-10 but contrary to previous work, this one suggests using a larger batch size when using the One-Cycle learning rate schedule. The batch capacity should only be limited due to memory constraints, not by anything else since larger batch sizes enables to use larger learning rates. Although, the benefits of larger batch sizes tapers off after a some point and 512 seems to be a good choice in most cases.
