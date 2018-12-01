@@ -17,6 +17,9 @@ So let's come to the point quickly and discuss how can we achieve these state of
 To acheive super-convergence, we need to use "One-Cycle" policy described as below. Start your training with a zero or very small learning rate and then increase it in a linear (or exponential) fashion slowly throughout a pre-training run. This provides information on how well the network can be trained over a range of learning rates. With a small learning rate, the network begins to converge and, as the learning rate increases, it eventually becomes too large and causes the test accuracy/loss to diverge suddenly. Typical curves would look like this: 
 
 ![2](https://user-images.githubusercontent.com/41862477/49327139-398f1780-f583-11e8-9b0e-ff6dead40c98.JPG)
+![3](https://user-images.githubusercontent.com/41862477/49327161-8a067500-f583-11e8-9b40-15377aaf97e6.JPG)
+
+The second curve shows the independence between the number of training iterations and the accuarcy
 
 
 
