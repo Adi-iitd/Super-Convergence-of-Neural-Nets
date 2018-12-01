@@ -18,7 +18,7 @@ To achieve super-convergence, we will use "One-Cycle" Learning rate Policy and f
 
 The motivation behind such One-Cycle policy is the following: The learning rate initially starts small to allow convergence to begin. As the network traverses the flat valley, the learning rate is large, allowing for faster progress through the valley. In the final stages of the training, when the training needs to settle into the local minimum, the learning rate is once again reduced to a small value. Following figure illustrates the One-cycle policy better. Left plot shows variation of cyclical Learning rate and right plot for the Cyclical Momemtum.
 
-![4](https://user-images.githubusercontent.com/41862477/49328564-0d7e9100-f599-11e8-8b07-3bd2dfd322fa.JPG)
+![4](https://user-images.githubusercontent.com/41862477/49328784-0efd8880-f59c-11e8-94f3-35a69260ce97.JPG)
 
 ### Learning_Rate Finder
 We start the pre-training with a zero or very small learning rate and then increase it in a linear (or exponential) fashion slowly throughout the run. This provides information on how well the network can be trained over a range of learning rates. With a small learning rate, the network begins to converge and, as the learning rate increases, it eventually becomes too large and causes the test accuracy/loss to diverge suddenly. Typical curves would look similar to the one attched below. The second plot illustrates the independence between the number of training iterations and the accuracy achieved. 
