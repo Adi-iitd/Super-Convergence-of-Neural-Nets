@@ -10,16 +10,18 @@ You might be wondering that training a model to 94% test accuracy on CIFAR10 is 
 
 ### Super-convergence
 So let's come to the meaty part quickly and discuss how can we achieve these state of the art results in far lesser number of training iterations. Many people still hold an opinion that training a deep neural network with the optimal hyperparameters is black magic because there are just so many hyper-parameters that one needs to tune; What kind of learning rate policy will be best, what kernel size to pick for the architecture, what weight decay and dropout value will be optimal to add regularization to the network? So, let's break this stereotype and try to unleash some of these black arts. 
+
 First, we will see how to find the boundaries for Learning rate schedule [most important hyper-parameter!!] i.e. Maximum and Minimum Learning rate. Then we will try to run Grid Search CV for the remaining parameters (weight decay and dropout) to find the best value for them.
 
 #### One-Cycle Policy
 To achieve super-convergence, we will use "One-Cycle" Learning rate Policy and for that, we need to specify minimum and maximum learning rate. The maximum Learning rate is calculated as described below from the Lr range test and the minimum learning rate is typically 1/10th or 1/20th of the maximum learning rate. One cycle consists of two step sizes, one in which Lr increases from the min value to max and the other in which it decreases from max to its original min value. In our case, one cycle will be a bit smaller than the total number of iterations/epochs and in the remaining iterations, we will allow the learning rate to decrease several orders of magnitude less than its initial value. 
+
 The motivation behind such One-Cycle policy is the following: The learning rate initially starts small to allow convergence to begin. As the network traverses the flat valley, the learning rate is large, allowing for faster progress through the valley. In the final stages of the training, when the training needs to settle into the local minimum, the learning rate is once again reduced to a small value. Following figure illustrates the One-cycle policy better. Left plot shows variation of cyclical Learning rate and right plot for the Cyclical Momemtum.
 
 ![4](https://user-images.githubusercontent.com/41862477/49328564-0d7e9100-f599-11e8-8b07-3bd2dfd322fa.JPG)
 
 #### Learning_Rate Finder
-We start the training with a zero or very small learning rate and then increase it in a linear (or exponential) fashion slowly throughout a pre-training run. This provides information on how well the network can be trained over a range of learning rates. With a small learning rate, the network begins to converge and, as the learning rate increases, it eventually becomes too large and causes the test accuracy/loss to diverge suddenly. Typical curves would look like this, the second curve shows the independence between the number of training iterations and the accuracy: 
+We start the pre-training with a zero or very small learning rate and then increase it in a linear (or exponential) fashion slowly throughout the run. This provides information on how well the network can be trained over a range of learning rates. With a small learning rate, the network begins to converge and, as the learning rate increases, it eventually becomes too large and causes the test accuracy/loss to diverge suddenly. Typical curves would look similar to the one attched below. The second plot illustrates the independence between the number of training iterations and the accuracy achieved. 
 
 ![2](https://user-images.githubusercontent.com/41862477/49327191-09944400-f584-11e8-8509-ddbde585b8ee.JPG)
 
