@@ -6,7 +6,7 @@ This post describes a phenomenon “Super-Convergence” where neural networks c
 ## Motivation:
 You might be wondering that training a model to 94% test accuracy on CIFAR10 is a meaningless exercise since state-of-the-art is already above 98%. "State-of-the-art" accuracy is an ill-conditioned target in the sense that throwing a larger model, more hyperparameter tuning, more data augmentation or longer training time at the problem will typically lead to accuracy gains, making a fair comparison between different works a delicate task. Moreover, the existence of super-convergence is relevant to understanding why deep networks generalize so well. The figure below illustrates the super-convergence on the CIFAR10 dataset. We can also easily observe that with the modified learning rate schedule, we achieve a higher final test accuracy (92.1%) than typical training (91.2%) only after a few iterations. 
 
-![1](https://user-images.githubusercontent.com/41862477/49326808-b4553400-f57d-11e8-8931-30121431d806.JPG) 
+![1](https://user-images.githubusercontent.com/41862477/49328753-972f5e00-f59b-11e8-9fbf-16465a08c672.JPG) 
 
 ## Super-convergence
 So let's come to the meaty part quickly and discuss how can we achieve these state of the art results in far lesser number of training iterations. Many people still hold an opinion that training a deep neural network with the optimal hyperparameters is black magic because there are just so many hyper-parameters that one needs to tune; What kind of learning rate policy will be best, what kernel size to pick for the architecture, what weight decay and dropout value will be optimal to add regularization to the network? So, let's break this stereotype and try to unleash some of these black arts. 
