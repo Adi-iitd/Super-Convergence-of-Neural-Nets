@@ -59,4 +59,5 @@ Using the knowledge of the dataset and architecture we can decide which values t
 In the grid search we often use values like 3.18e-4 for the weight deacy. The reason behind choosing 3 rather than 5 is that a magnitude is needed for weight decay and this report suggests bisection of the exponent rather than bisecting the value (i.e., between 10−4
 and 10−3 one bisects as 10−3.5 = 3.16 × 10−4).
 
-![1](https://user-images.githubusercontent.com/41862477/49330186-517d9000-f5b1-11e8-9f92-e8c9b3fdf812.JPG)
+![1](https://user-images.githubusercontent.com/41862477/49330227-a4efde00-f5b1-11e8-9c7e-df745d7f76b4.JPG)
+
