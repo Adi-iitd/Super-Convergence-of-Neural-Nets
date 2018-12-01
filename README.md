@@ -35,8 +35,14 @@ Earlier, there used to be a popular belief common among people that small batch 
 ![5](https://user-images.githubusercontent.com/41862477/49328844-e6c25980-f59c-11e8-8dbd-77feeb3d8390.JPG)
 
 ### Cyclical Momentum
-The effect of Momentum and Learning rate are closely inter-wined since the optimal learning rate is dependent on the momentum and momentum is dependent on the learning rate. Momentum is designed to accelerate network training but its effect on updating the weights is of the same magnitude as the learning rate (can be easily shown for Stochastic Gradient Descent). The optimal training procedure is a combination of an increasing cyclical learning rate, where an initial small learning rate permits convergence to begin, and a decreasing
-cyclical momentum, where the decreasing momentum allows the learning rate to become larger in the early to middle parts of training. However, if a constant learning rate is used then a large constant momentum (i.e., 0.9-0.99) will act like a pseudo increasing learning rate and will speed up the training. However, use of too large a value for momentum causes poor training results and are commonly visible in early part of the training. Decreasing the momentum while the learning rate increases provides three benefits: (1) A lower minimum test loss, (2) Faster initial convergence, (3) Greater convergence stability over a larger range of learning rate.
+The effect of Momentum and Learning rate on the training dynamics are closely inter-wined since the optimal learning rate is dependent on the momentum and momentum is dependent on the learning rate. Momentum is designed to accelerate network training but its effect on updating the weights is of the same magnitude as the learning rate (can be easily shown for Stochastic Gradient Descent). The optimal training procedure is a combination of an increasing cyclical learning rate, where an initial small learning rate permits convergence to begin, and a decreasing cyclical momentum, where the decreasing momentum allows the learning rate to become larger in the early to middle parts of training. However, if a constant learning rate is used then a large constant momentum (i.e., 0.9-0.99) will act like a pseudo increasing learning rate and will speed up the training. Following plot shows the effect of momentum on the test accuracy for the CIFAR10 data with ResNet56 architecture.
 
-#### Weight Decay
+![1](https://user-images.githubusercontent.com/41862477/49328932-3ce3cc80-f59e-11e8-9ad3-70a7f1cc617c.JPG)
+
+The max and min value of momentum doesn't really matters much and cyclical range of 0.85-0.95 works just fine.
+
+Decreasing the momentum while the increasing the learning rate provides three benefits: 
+(1) A lower test loss, (2) Faster initial convergence, (3) Greater convergence stability over a larger range of learning rate.
+
+### Weight Decay
 
