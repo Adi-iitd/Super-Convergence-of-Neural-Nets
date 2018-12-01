@@ -8,6 +8,7 @@ There is a reasonable point of view that says that training a model to 94% test 
 Fig1 illustrates the super-convergence: 
 
 ![1](https://user-images.githubusercontent.com/41862477/49326808-b4553400-f57d-11e8-8931-30121431d806.JPG)
+
 Here we can easily observe that with the modified learning rate schedule, we achieve a higher final test accuracy (92.1%) than typical training (91.2%) after only a few iterations. 
 
 ### Super-convergence
@@ -21,5 +22,16 @@ We start the training with a zero or very small learning rate and then increase 
 
 ![2](https://user-images.githubusercontent.com/41862477/49327191-09944400-f584-11e8-8509-ddbde585b8ee.JPG)
 
-This test will give us the maximum learning rate that we can use with this specific dataset and architecture. 
+#### Why Large learning rate is behaving like a regularizer?
+The LR range test reveals evidence of regularization through results which shows an increasing training loss and decreasing test loss while the learning rate increases from approximately 0.2 to 2.0 when training with the Cifar-10 dataset and a Resnet-56 architecture, which implies that regularization is occurring while training with these large learning rates.
+Since the definition of regularization suggests “any modification we make to a learning algorithm that is intended to reduce its generalization error”, so large learning rates should be considered as regularizing.
+
+#### Bacth Size
+Earlier, small batch sizes have been recommended for regularization effects and others have shown there to be an optimal batch size on the order of 80 for Cifar-10 but contrary to previous work, this one suggests using a larger batch size when using the One-Cycle learning rate schedule. The batch capacity should only be limited due to memory constraints, not by anything else since larger batch sizes enables to use larger learning rates. Although, the benefits of larger batch sizes tapers off after a some point and 512 seems to be a good choice in most cases.
+
+#### Cyclical Momentum
+The effect of Momentum and Learning rate are closely inter-wined since the optimal learning rate is dependent on the momentum and momentum is dependent on the learning rate. Momentum is designed to accelerate network training but its effect on updating the weights is of the same magnitude as the learning rate (can be easily shown for Stochastic Gradient Descent). The optimal training procedure is a combination of an increasing cyclical learning rate, where an initial small learning rate permits convergence to begin, and a decreasing
+cyclical momentum, where the decreasing momentum allows the learning rate to become larger in the early to middle parts of training. However, if a constant learning rate is used then a large constant momentum (i.e., 0.9-0.99) will act like a pseudo increasing learning rate and will speed up the training. However, use of too large a value for momentum causes poor training results and are commonly visible in early part of the training. Decreasing the momentum while the learning rate increases provides three benefits: (1) A lower minimum test loss, (2) Faster initial convergence, (3) Greater convergence stability over a larger range of learning rate.
+
+#### Weight Decay
 
