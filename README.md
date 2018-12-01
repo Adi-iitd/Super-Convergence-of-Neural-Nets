@@ -13,11 +13,15 @@ Here we can easily observe that with the modified learning rate schedule, we ach
 ### Super-convergence
 So let's come to the point quickly and discuss how can we achieve these state of the art results in far lesser number of training iterations. Many people still hold an opinion that training a deep neural network with the optimal hyperparameters is black magic. There are just so many hyper-parameters that one needs to tune; what kind of learning rate policy to use, what kernel size should we pick in our architecture, what weight decay and dropout value will be optimal to regularize the network optimally?  So, let's break this stereotype and try to unleash some of the black arts. First, we will see how to find the best Learning rate schedule (most important hyper-parameter).  
 
+#### One-Cycle Policy
+To acheive super-convergence, we will use "One-Cycle" Learning rate Policy and for that we need to specify minimum and maximum learning rate boundaries. Maximum Learning rate is calculated as described below from LR range test and the minimum learning rate is typically 1/10th or 1/20th of the maximum learning rate. One cycle consists of two stepsizes, one in which lr increases from its min value to max and the other in which it decreases from max to its min value. In our case, one cycle will be a bit smaller than the total number of iterations/epochs and in the remaining iterations we will allow the learning rate to decrease several orders of magnitude less than its initial value. 
+
 #### Learning_Rate Finder
-To acheive super-convergence, we need to use "One-Cycle" policy described as below. Start your training with a zero or very small learning rate and then increase it in a linear (or exponential) fashion slowly throughout a pre-training run. This provides information on how well the network can be trained over a range of learning rates. With a small learning rate, the network begins to converge and, as the learning rate increases, it eventually becomes too large and causes the test accuracy/loss to diverge suddenly. Typical curves would look like this, the second curve shows the independence between the number of training iterations and the accuarcy: 
+We start the training with a zero or very small learning rate and then increase it in a linear (or exponential) fashion slowly throughout a pre-training run. This provides information on how well the network can be trained over a range of learning rates. With a small learning rate, the network begins to converge and, as the learning rate increases, it eventually becomes too large and causes the test accuracy/loss to diverge suddenly. Typical curves would look like this, the second curve shows the independence between the number of training iterations and the accuarcy: 
 
 ![2](https://user-images.githubusercontent.com/41862477/49327191-09944400-f584-11e8-8509-ddbde585b8ee.JPG)
 
+This test will give us the maximum learning rate that we can use with this specific dataset and architecture. 
 
 
 
