@@ -32,7 +32,7 @@ The LR range test reveals evidence of regularization through results which shows
 ### Bacth Size
 Earlier, there used to be a popular belief common among people that small batch size induces regularization effects and others have also shown an optimal batch size on the order of 80 for Cifar-10, but contrary to previous work, this one suggests using a larger batch size when using the One-Cycle policy. The batch capacity should only be limited because of memory constraints, not by anything else since larger batch sizes enables to use larger learning rates. Although, the benefits of larger batch sizes also tapers off after a some point but 512 seems to be a good choice in most cases. Left plot shows the effect of batch size on test accuracy while the right one on test loss.  
 
-![5](https://user-images.githubusercontent.com/41862477/49328690-cb564f00-f59a-11e8-8475-6fa13f5c3f76.JPG)
+![5](https://user-images.githubusercontent.com/41862477/49328844-e6c25980-f59c-11e8-8dbd-77feeb3d8390.JPG)
 
 ### Cyclical Momentum
 The effect of Momentum and Learning rate are closely inter-wined since the optimal learning rate is dependent on the momentum and momentum is dependent on the learning rate. Momentum is designed to accelerate network training but its effect on updating the weights is of the same magnitude as the learning rate (can be easily shown for Stochastic Gradient Descent). The optimal training procedure is a combination of an increasing cyclical learning rate, where an initial small learning rate permits convergence to begin, and a decreasing
