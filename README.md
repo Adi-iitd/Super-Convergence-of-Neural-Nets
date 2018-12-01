@@ -36,7 +36,7 @@ The LR range test reveals evidence of regularization through results which shows
 
 
 ### Bacth Size
-Earlier, there used to be a popular belief common among people that small batch size induces regularization effects and others have also shown an optimal batch size on the order of 80 for Cifar-10, but contrary to previous work, this one suggests using a larger batch size when using the One-Cycle policy. The batch capacity should only be limited because of memory constraints, not by anything else since larger batch sizes enables to use larger learning rates. Although, the benefits of larger batch sizes also tapers off after a some point but 512 seems to be a good choice in most cases. Left plot shows the effect of batch size on test accuracy while the right one on test loss.  
+Earlier, there used to be a popular belief common among people that small batch size induces regularization effects and others have also shown an optimal batch size on the order of 80 for Cifar-10, but contrary to previous work, this paper suggests using a larger batch size when using the One-Cycle policy. The batch capacity should only be limited because of memory constraints, not by anything else since larger batch sizes enables to use larger learning rates. Although, the benefits of larger batch sizes also tapers off after a some point but 512 seems to be a good choice in most cases. Left plot shows the effect of batch size on test accuracy while the right one on test loss.  
 
 ![5](https://user-images.githubusercontent.com/41862477/49328844-e6c25980-f59c-11e8-8dbd-77feeb3d8390.JPG)
 
@@ -53,4 +53,10 @@ Decreasing the momentum while the increasing the learning rate provides three be
 
 
 ### Weight Decay
+Since the amount of regularization must be balanced for each dataset and architecture, the value of weight decay is a key knob to turn for tuning regularization against the regularization from an increasing learning rate. This requires a grid search to determine the proper magnitude but usually does not require more than one significant figure accuracy. 
 
+Using the knowledge of the dataset and architecture we can decide which values to test. For example, a more complex dataset requires less regularization so test smaller weight decay values, such as 10−4, 10−5, 10−6, 0. A shallow architecture requires more regularization so test larger weight decay values, such as 10−2, 10−3, 10−4.
+In the grid search we often use values like 3.18e-4 for the weight deacy. The reason behind choosing 3 rather than 5 is that a magnitude is needed for weight decay and this report suggests bisection of the exponent rather than bisecting the value (i.e., between 10−4
+and 10−3 one bisects as 10−3.5 = 3.16 × 10−4).
+
+![1](https://user-images.githubusercontent.com/41862477/49330186-517d9000-f5b1-11e8-9f92-e8c9b3fdf812.JPG)
