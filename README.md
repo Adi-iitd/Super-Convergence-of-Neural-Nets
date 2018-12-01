@@ -11,6 +11,9 @@ Fig1 illustrates the super-convergence:
 Here we can easily observe that with the modified learning rate schedule, we achieve a higher final test accuracy (92.1%) than typical training (91.2%) after only few iterations. 
 
 ### Super-convergence
-So lets come to the point quickly and discuss how can we acheive these state of the art results in far lesser number of training iterations. Like we all know, many people still hold the opinion that training a deep neural network with optimal hyperparameters is a black magic. There are just so many hyper-paramters that one need to tune; what kind of learning rate policy to use, what kernel size should we pick in our architecture, what weight decay and dropout value will be optimal so as to regularize the network optimally? 
-So, let's break this stereotype and try to unleash some of the black arts :P 
+So let's come to the point quickly and discuss how can we achieve these state of the art results in far lesser number of training iterations. Many people still hold an opinion that training a deep neural network with the optimal hyperparameters is black magic. There are just so many hyper-parameters that one needs to tune; what kind of learning rate policy to use, what kernel size should we pick in our architecture, what weight decay and dropout value will be optimal to regularize the network optimally?  So, let's break this stereotype and try to unleash some of the black arts. First, we will see how to find the best Learning rate schedule (most important hyper-parameter).  
+
+#### Learning_Rate Finder
+To acheive super-convergence, we need to use "One-Cycle" policy described as below. Start your training with a zero or very small learning rate and then increase it in a linear (or exponential) fashion slowly throughout a pre-training run. This provides information on how well the network can be trained over a range of learning rates. With a small learning rate, the network begins to converge and, as the learning rate increases, it eventually becomes too large and causes the test accuracy/loss to diverge suddenly. Typical curves would look like this: 
+
 
