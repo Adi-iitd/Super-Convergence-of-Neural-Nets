@@ -23,5 +23,3 @@ We start the training with a zero or very small learning rate and then increase 
 
 This test will give us the maximum learning rate that we can use with this specific dataset and architecture. 
 
-
-
