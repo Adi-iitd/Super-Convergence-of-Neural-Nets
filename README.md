@@ -14,11 +14,10 @@ Here we can easily observe that with the modified learning rate schedule, we ach
 So let's come to the point quickly and discuss how can we achieve these state of the art results in far lesser number of training iterations. Many people still hold an opinion that training a deep neural network with the optimal hyperparameters is black magic. There are just so many hyper-parameters that one needs to tune; what kind of learning rate policy to use, what kernel size should we pick in our architecture, what weight decay and dropout value will be optimal to regularize the network optimally?  So, let's break this stereotype and try to unleash some of the black arts. First, we will see how to find the best Learning rate schedule (most important hyper-parameter).  
 
 #### Learning_Rate Finder
-To acheive super-convergence, we need to use "One-Cycle" policy described as below. Start your training with a zero or very small learning rate and then increase it in a linear (or exponential) fashion slowly throughout a pre-training run. This provides information on how well the network can be trained over a range of learning rates. With a small learning rate, the network begins to converge and, as the learning rate increases, it eventually becomes too large and causes the test accuracy/loss to diverge suddenly. Typical curves would look like this: 
+To acheive super-convergence, we need to use "One-Cycle" policy described as below. Start your training with a zero or very small learning rate and then increase it in a linear (or exponential) fashion slowly throughout a pre-training run. This provides information on how well the network can be trained over a range of learning rates. With a small learning rate, the network begins to converge and, as the learning rate increases, it eventually becomes too large and causes the test accuracy/loss to diverge suddenly. Typical curves would look like this, the second curve shows the independence between the number of training iterations and the accuarcy: 
 
 ![2](https://user-images.githubusercontent.com/41862477/49327191-09944400-f584-11e8-8509-ddbde585b8ee.JPG)
 
-The second curve shows the independence between the number of training iterations and the accuarcy
 
 
 
