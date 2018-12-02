@@ -3,7 +3,7 @@
 ## Abstract: 
 This post provides an overview of a phenomenon called "Super Convergence" where we can train a deep neural network in order of magnitude faster compared to conventional training methods. One of the key elements is training the network using "One-cycle policy" with maximum possible learning rate.
 
-*An insight that allows "Super Convergence" in training is the use of large learning rates that regularizes the network, hence requiring a reduction of all other forms of regularization in order to preserve an optimal balance between underfitting and overfitting.
+*An insight that allows "Super Convergence" in training is the use of large learning rates that regularizes the network, hence requiring a reduction of all other forms of regularization in order to preserve an optimal balance between underfitting and overfitting.*
 
 
 ## Motivation:
