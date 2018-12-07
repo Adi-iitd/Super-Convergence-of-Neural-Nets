@@ -7,9 +7,11 @@ This post provides an overview of a phenomenon called "Super Convergence" where 
 
 
 ## Motivation:
-You might be wondering that training a model to 94% (high) test accuracy on CIFAR10 in about 75 epochs is a meaningless exercise since state-of-the-art is already above 98%. But don't you think, "State of the art" accuracy is an ill-conditioned target in the sense that throwing a larger model, more hyperparameter tuning, more data augmentation or longer training time at the problem will typically lead to accuracy gains, making a fair comparison between different works a delicate task. Moreover, the presence of Super Convergence is relevant to the understanding of the generalization of deep networks. The plot below illustrates the "Super Convergence" on the CIFAR10 dataset. We can easily observe that with the modified learning rate schedule we achieve a higher final test accuracy (92.1%) than with typical training (91.2%) and that too, only in a few iterations.
+You might be wondering that training a model to 94% (high) test accuracy on CIFAR10 in about 75 epochs is a meaningless exercise since state-of-the-art is already above 98%. But don't you think, "State of the art" accuracy is an ill-conditioned target in the sense that throwing a larger model, more hyperparameter tuning, more data augmentation or longer training time at the problem will typically lead to accuracy gains, making a fair comparison between different works a delicate task. Moreover, the presence of Super Convergence is relevant to the understanding of the generalization of deep networks.
 
 ![1](https://user-images.githubusercontent.com/41862477/49628809-66707e00-fa0c-11e8-9045-822c62582faa.JPG) 
+
+> The plot shown above illustrates the "Super Convergence" on the CIFAR10 dataset. We can easily observe that with the modified learning rate schedule we achieve a higher final test accuracy (92.1%) than with typical training (91.2%) and that too, only in a few iterations.
 
 ## Super-convergence
 So let's come to the point quickly and discuss how can we achieve these state of the art results in far lesser number of training iterations. Many people still hold an opinion that training a deep neural network with the optimal hyperparameters is black magic because there are just so many hyper-parameters that one needs to tune. What kind of learning rate policy to follow, what kernel size to pick for the architecture, what weight decay and dropout value will be optimal for the regularization? So, let's break this stereotype and try to unleash some of these black arts.
@@ -17,7 +19,7 @@ So let's come to the point quickly and discuss how can we achieve these state of
 *We will start with LR Range test that helps you find the maximum Learning rate, which you can use to train your model (most important hyper-parameter). Then we will run Grid Search CV for the remaining parameters (weight decay & dropout) to find their best values.*
 
 ### Learning_Rate Finder
-This technique to find max learning rate was first introduced by a great researcher Leslie Smith in his [paper](https://arxiv.org/pdf/1506.01186.pdf), which goes into much more detail of about the benefits of the use of Cyclical learning rate and Cyclical momentum. We start the pre-training with a pretty small learning rate and then increase it linearly (or exponentially) throughout the run. This provides an overview of how well we can train the network over a range of learning rate. With a small learning rate, the network begins to converge and, as the learning rate increases, it eventually becomes too large and causes the test accuracy/loss to diverge suddenly.
+It was **Leslie Smith** who first introduced this technique to find max learning in his [paper](https://arxiv.org/pdf/1506.01186.pdf), which goes into much more detail, of about the benefits of the use of Cyclical learning rate and Cyclical momentum. We start the pre-training with a pretty small learning rate and then increase it linearly (or exponentially) throughout the run. This provides an overview of how well we can train the network over a range of learning rate. With a small learning rate, the network begins to converge and, as the learning rate increases, it eventually becomes too large and causes the test accuracy/loss to diverge suddenly.
 
 ![5](https://user-images.githubusercontent.com/41862477/49628813-67091480-fa0c-11e8-9667-35e5763be8a5.JPG)
 ![4](https://user-images.githubusercontent.com/41862477/49628812-67091480-fa0c-11e8-9455-c74432bc0a59.JPG)
@@ -35,10 +37,9 @@ To achieve super-convergence, we will use "One-Cycle" Learning Rate Policy which
 
 > The left plot shows the visualization of, how training transverses a loss function topology, whereas the right plot shows a close-up of the end of optimization.
 
-#### *Why does a large Learning rate act like a regularizer?
-The LR Range test shows evidence of regularization through results which shows an increasing training loss and decreasing test loss while the learning rate increases from approximately 0.2 to 2.0 when training with the Cifar-10 dataset and a Resnet-56 architecture, which implies that regularization is happening while training with these large learning rates. 
-Moreover, the definition says regularization is any modification we make to a learning algorithm that is intended to reduce its generalization error. So, we can now infer that a large learning rate works like a regularizer and helps us achieve an optimal balance between overfitting and underfitting.
+> ***Why does a large Learning rate act like a regularizer?***
 
+The **LR Range test** shows evidence of regularization through results, which shows an increasing training loss and decreasing test loss while the learning rate increases from approximately 0.2 to 2.0 when training with the Cifar-10 dataset and a Resnet-56 architecture, which implies that regularization is happening while training with these large learning rates. Moreover, the definition says **regularization** is any modification we make to a learning algorithm that is intended to reduce its generalization error.
 
 ### Batch Size
 As we all know that small batch size induces regularization effects and others have also shown an optimal batch size on the order of 80 for Cifar-10, but contrary to previous work, the paper suggests using a larger batch size when using the "One-Cycle" policy. The batch capacity should only be limited because of memory constraints, not by anything else since larger batch sizes enable us to use larger learning rates. Although the benefits of larger batch sizes also taper off after some point and 512 seems to be a good choice. The left plot shows the effect of batch size on test accuracy while the right one on test loss.
