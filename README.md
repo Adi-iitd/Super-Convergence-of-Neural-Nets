@@ -54,6 +54,7 @@ As we all know that small batch size induces regularization effects and some hav
 
 It is also interesting to contrast the test loss to the test accuracy. *Although larger batch size attains a lower loss value early in the training, the final loss value is least only for the smaller batch size, which is the complete opposite to that of accuracy result.*
 
+***
 
 ### Cyclical Momentum
 The effect of Momentum and Learning rate on the training dynamics are closely related since both of them are dependent on each other. Momentum is designed to accelerate network training, but its effect on updating the weights is of the same magnitude as the learning rate (can be easily shown for Stochastic Gradient Descent). 
@@ -69,11 +70,12 @@ The optimal training procedure is a combination of an increasing cyclical learni
 - Faster initial convergence, 
 - Greater convergence stability over a larger range of learning rate.
 
-> *One more thing to note that decreasing the momentum and then increasing it is giving much better results compared to otherway round.*
+*One more thing to note that decreasing the momentum and then increasing it is giving much better results compared to otherway round.*
 
+***
 
 ### Weight Decay
-This is the last important hyper-paramter that is worth discussing. The amount of regularization must be balanced for each dataset and architecture, and the value of weight decay is a key knob to tune regularization. This requires a grid search over few values to determine the optimal magnitude but usually does not require to search over more than one significant figure.
+This is the last important hyper-parameter that is worth discussing. The amount of regularization must be balanced for each dataset and architecture, and the value of weight decay is a key knob to tune regularization. This requires a grid search over few values to determine the optimal magnitude but usually does not require to search over more than one significant figure.
 
 Using the knowledge of the dataset and architecture we can decide which values to test. For example, a more complex dataset requires less regularization, so testing smaller weight decay values, such as 10−4, 10−5, 10−6, and 0 would suffice. A shallow architecture requires more regularization, so larger weight decay values are tested such as 10−2, 10−3, 10−4. In the grid search we often use values like 3.18e-4, and the reason behind choosing 3 rather than 5 is that a bisection of the exponent is taken into account rather than the bisection of the magnitude itself (i.e., between 10−4 and 10−3 one bisects as 10−3.5 = 3.16 × 10−4).
 
@@ -81,3 +83,4 @@ Using the knowledge of the dataset and architecture we can decide which values t
 
 > From the above plot we can see that weight decay of 1.8e-3 (bisecting the exponent once again b/w -0.5 & -1 i.e. 10^-0.75) allows us to use much larger learning rate, plus giving the minimum test loss compared to other values.
 
+*Now following this learning rate schedule with a well-defined procedure to do Grid-Search CV will give you better results with almost a reduction of 50% in the training iterations.   
