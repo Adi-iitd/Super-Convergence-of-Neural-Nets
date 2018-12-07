@@ -3,34 +3,37 @@
 ## Abstract: 
 This post provides an overview of a phenomenon called "Super Convergence" where we can train a deep neural network in order of magnitude faster compared to conventional training methods. One of the key elements is training the network using "One-cycle policy" with maximum possible learning rate.
 
-*An insight that allows "Super Convergence" in training is the use of large learning rates that regularizes the network, hence requiring a reduction of all other forms of regularization in order to preserve an optimal balance between underfitting and overfitting.*
+*An insight that allows "Super Convergence" in training is the use of large learning rates that regularizes the network, hence requiring a reduction of all other forms of regularization to preserve a balance between underfitting and overfitting.*
 
 
 ## Motivation:
-You might be wondering that training a model to 94% (high) test accuracy on CIFAR10 in about 75 epochs is a meaningless exercise since state-of-the-art is already above 98%. But don't you think, "State of the art" accuracy is an ill-conditioned target in the sense that throwing a larger model, more hyperparameter tuning, more data augmentation or longer training time at the problem will typically lead to accuracy gains, making a fair comparison between different works a delicate task. Moreover, the presence of "Super Convergence" is relevant to understanding why deep networks generalize so well. The plot below illustrates the "Super Convergence" on the CIFAR10 dataset. We can easily observe that with the modified learning rate schedule we achieve a higher final test accuracy (92.1%) than with typical training (91.2%) and that too, only after a few iterations.
+You might be wondering that training a model to 94% (high) test accuracy on CIFAR10 in about 75 epochs is a meaningless exercise since state-of-the-art is already above 98%. But don't you think, "State of the art" accuracy is an ill-conditioned target in the sense that throwing a larger model, more hyperparameter tuning, more data augmentation or longer training time at the problem will typically lead to accuracy gains, making a fair comparison between different works a delicate task. Moreover, the presence of Super Convergence is relevant to the understanding of the generalization of deep networks. The plot below illustrates the "Super Convergence" on the CIFAR10 dataset. We can easily observe that with the modified learning rate schedule we achieve a higher final test accuracy (92.1%) than with typical training (91.2%) and that too, only in a few iterations.
 
 ![1](https://user-images.githubusercontent.com/41862477/49628809-66707e00-fa0c-11e8-9045-822c62582faa.JPG) 
 
 ## Super-convergence
 So let's come to the point quickly and discuss how can we achieve these state of the art results in far lesser number of training iterations. Many people still hold an opinion that training a deep neural network with the optimal hyperparameters is black magic because there are just so many hyper-parameters that one needs to tune. What kind of learning rate policy to follow, what kernel size to pick for the architecture, what weight decay and dropout value will be optimal for the regularization? So, let's break this stereotype and try to unleash some of these black arts.
 
-*We will start with LR Range test that helps you find the maximum Learning rate that you can use to train your model (most important hyper-parameter). Then we will try to run Grid Search CV for the remaining parameters (weight decay and dropout) to find the best value for them.*
+*We will start with LR Range test that helps you find the maximum Learning rate, which you can use to train your model (most important hyper-parameter). Then we will run Grid Search CV for the remaining parameters (weight decay & dropout) to find their best values.*
 
+### Learning_Rate Finder
+This technique to find max learning rate was first introduced by a great researcher Leslie Smith in his [paper](https://arxiv.org/pdf/1506.01186.pdf), which goes into much more detail of about the benefits of the use of Cyclical learning rate and Cyclical momentum. We start the pre-training with a pretty small learning rate and then increase it linearly (or exponentially) throughout the run. This provides an overview of how well we can train the network over a range of learning rate. With a small learning rate, the network begins to converge and, as the learning rate increases, it eventually becomes too large and causes the test accuracy/loss to diverge suddenly.
+
+![5](https://user-images.githubusercontent.com/41862477/49628813-67091480-fa0c-11e8-9667-35e5763be8a5.JPG)
+![4](https://user-images.githubusercontent.com/41862477/49628812-67091480-fa0c-11e8-9455-c74432bc0a59.JPG)
+
+> Typical curves would look similar to the one attached above, the second plot illustrates the independence between the number of training iterations and the accuracy achieved.
 
 ### One-Cycle Policy
-To achieve super-convergence, we will use "One-Cycle" Learning Rate Policy which requires specifying minimum and maximum learning rate. The Lr Range test gives the maximum learning rate, and the minimum learning rate is typically 1/10th or 1/20th of the max value. One cycle consists of two step sizes, one in which Lr increases from the min to max and the other in which it decreases from max to min. In our case, one cycle will be a bit smaller than the total number of iterations/epochs and in the remaining iterations, we will allow the learning rate to decrease several orders of magnitude lesser than its initial value. The following plot illustrates the One-cycle policy better, left one shows the variation of the cyclical Learning rate and the right one shows the same for the cyclical Momentum.
+To achieve super-convergence, we will use "One-Cycle" Learning Rate Policy which requires specifying minimum and maximum learning rate. The Lr Range test gives the maximum learning rate, and the minimum learning rate is typically 1/10th or 1/20th of the max value. One cycle consists of two step sizes, one in which Lr increases from the min to max and the other in which it decreases from max to min. In our case, one cycle will be a bit smaller than the total number of iterations/epochs and in the remaining iterations, we will allow the learning rate to decrease several orders of magnitude lesser than its initial value. The following plot illustrates the One-cycle policy better - left one shows the cyclical Learning rate and the right one shows the cyclical Momentum.
 
 ![2](https://user-images.githubusercontent.com/41862477/49628810-66707e00-fa0c-11e8-8595-25851c8997b8.JPG)
 
-*The motivation for the "One Cycle" policy was the following: The learning rate initially starts small to allow convergence to begin but as the network traverses the flat valley, the learning rate is large, allowing for faster progress through the valley. In the final stages of the training, when the training needs to settle into the local minimum, the learning rate is once again reduced to a small value.*
+*The motivation for the "One Cycle" policy was the following: The learning rate initially starts small to allow convergence to begin but as the network traverses the flat valley, the learning rate becomes large, allowing for faster progress through the valley. In the final stages of the training, when the training needs to settle into the local minimum, the learning rate is once again reduced to a small value.*
 
 ![3](https://user-images.githubusercontent.com/41862477/49628811-66707e00-fa0c-11e8-8d67-132366dfea61.JPG)
 
-### Learning_Rate Finder
-This technique to find max learning rate was first introduced by a great researcher Leslie Smith in his paper which goes into more detail about the benefits of the use of Cyclical learning rate and Cyclical momentum. We start the pre-training with a pretty small learning rate and then increase it linearly (or exponentially) throughout the run. This provides an overview of how well we can train the network over a range of learning rate. With a small learning rate, the network begins to converge and, as the learning rate increases, it eventually becomes too large and causes the test accuracy/loss to diverge suddenly. Typical curves would look similar to the one attached below. The second plot illustrates the independence between the number of training iterations and the accuracy achieved.
-
-![4](https://user-images.githubusercontent.com/41862477/49628812-67091480-fa0c-11e8-9455-c74432bc0a59.JPG)
-![5](https://user-images.githubusercontent.com/41862477/49628813-67091480-fa0c-11e8-9667-35e5763be8a5.JPG)
+> The left plot shows the visualization of, how training transverses a loss function topology, whereas the right plot shows a close-up of the end of optimization.
 
 #### *Why does a large Learning rate act like a regularizer?
 The LR Range test shows evidence of regularization through results which shows an increasing training loss and decreasing test loss while the learning rate increases from approximately 0.2 to 2.0 when training with the Cifar-10 dataset and a Resnet-56 architecture, which implies that regularization is happening while training with these large learning rates. 
