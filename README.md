@@ -37,22 +37,28 @@ To achieve super-convergence, we will use "One-Cycle" Learning Rate Policy which
 
 > The left plot shows the visualization of, how training transverses a loss function topology, whereas the right plot shows a close-up of the end of optimization.
 
-> ***Why does a large Learning rate act like a regularizer?***
+***Why does a large Learning rate act like a regularizer?***
 
-The **LR Range test** shows evidence of regularization through results, which shows an increasing training loss and decreasing test loss while the learning rate increases from approximately 0.2 to 2.0 when training with the Cifar-10 dataset and a Resnet-56 architecture, which implies that regularization is happening while training with these large learning rates. Moreover, the definition says **regularization** is any modification we make to a learning algorithm that is intended to reduce its generalization error.
+> The **LR Range test** shows evidence of regularization through results, which shows an increasing training loss and decreasing test loss while the learning rate increases from approximately 0.2 to 2.0 when training with the Cifar-10 dataset and a Resnet-56 architecture, which implies that regularization is happening while training with these large learning rates. Moreover, the definition says **regularization** is any modification we make to a learning algorithm that is intended to reduce its generalization error.
 
 ### Batch Size
-As we all know that small batch size induces regularization effects and others have also shown an optimal batch size on the order of 80 for Cifar-10, but contrary to previous work, the paper suggests using a larger batch size when using the "One-Cycle" policy. The batch capacity should only be limited because of memory constraints, not by anything else since larger batch sizes enable us to use larger learning rates. Although the benefits of larger batch sizes also taper off after some point and 512 seems to be a good choice. The left plot shows the effect of batch size on test accuracy while the right one on test loss.
+As we all know that small batch size induces regularization effects and some have also shown an optimal batch size on the order of 80 for Cifar-10, but contrary to previous work, this paper suggests using a larger batch size when using the **One-Cycle** policy. The batch size should only be limited because of memory constraints, not by anything else since larger batch size enables us to use larger learning rate. Although, the benefits of larger batch sizes taper off after some point. 
 
 ![6](https://user-images.githubusercontent.com/41862477/49629231-7ee19800-fa0e-11e8-8b86-d9c5003d9eca.JPG)
 
-Here, we can observe that batch size of 1024 achieves the best test accuracy in the least number of training iterations compared to others. It is also interesting to contrast the test loss to the test accuracy. *Although larger batch sizes attain lower loss values early in the training, final loss values are least only for the smaller batch sizes, which is the complete opposite to that of accuracy results.*
+> The left plot shows the effect of batch size on test accuracy while the right one on test loss. Here, we can observe that batch size of 1024 achieves the best test accuracy in the least number of training iterations compared to others. 
+
+It is also interesting to contrast the test loss to the test accuracy. *Although larger batch size attains a lower loss value early in the training, the final loss value is least only for the smaller batch size, which is the complete opposite to that of accuracy result.*
 
 
 ### Cyclical Momentum
-The effect of Momentum and Learning rate on the training dynamics are closely related since the optimal learning rate is dependent on the momentum and momentum is dependent on the learning rate. Momentum is designed to accelerate network training, but its effect on updating the weights is of the same magnitude as the learning rate (can be easily shown for Stochastic Gradient Descent). The optimal training procedure is a combination of an increasing cyclical learning rate and a decreasing cyclical momentum. The max value in the case of cyclical momentum can be chosen after running a grid search for few values (like 0.9, 0.95, 0.97, 0.99) and picking the one which gives the best accuracy. Authors also noticed that final results are nearly independent of the min value of momentum and practically 0.85 works just fine. Following plot shows the effect of momentum on the test accuracy for the CIFAR10 data with ResNet56 architecture.
+The effect of Momentum and Learning rate on the training dynamics are closely related since both of them are dependent on each other. Momentum is designed to accelerate network training, but its effect on updating the weights is of the same magnitude as the learning rate (can be easily shown for Stochastic Gradient Descent). 
+
+The optimal training procedure is a combination of an increasing cyclical learning rate and a decreasing cyclical momentum. The max value in the case of cyclical momentum can be chosen after running a grid search for few values (like 0.9, 0.95, 0.97, 0.99) and picking the one which gives the best accuracy. Authors also noticed that final results are nearly independent of the min value of momentum, and practically 0.85 works just fine.
 
 ![7](https://user-images.githubusercontent.com/41862477/49628891-bd765300-fa0c-11e8-914d-0dc3efb92176.JPG)
+
+> Following plot shows the effect of momentum on the test accuracy for the CIFAR10 data with ResNet56 architecture.
 
 *From the above plot we can see that decreasing the momentum while increasing the learning rate provides three benefits:*
 
