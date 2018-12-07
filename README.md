@@ -54,16 +54,18 @@ It is also interesting to contrast the test loss to the test accuracy. *Although
 ### Cyclical Momentum
 The effect of Momentum and Learning rate on the training dynamics are closely related since both of them are dependent on each other. Momentum is designed to accelerate network training, but its effect on updating the weights is of the same magnitude as the learning rate (can be easily shown for Stochastic Gradient Descent). 
 
-The optimal training procedure is a combination of an increasing cyclical learning rate and a decreasing cyclical momentum. The max value in the case of cyclical momentum can be chosen after running a grid search for few values (like 0.9, 0.95, 0.97, 0.99) and picking the one which gives the best accuracy. Authors also noticed that final results are nearly independent of the min value of momentum, and practically 0.85 works just fine.
+The optimal training procedure is a combination of an increasing cyclical learning rate and a decreasing cyclical momentum. The max value in the case of cyclical momentum can be chosen after running a **grid search** for few values (like 0.9, 0.95, 0.97, 0.99), and picking the one which gives the best test accuracy. Authors also observed that final results are nearly independent of the min value of momentum, and 0.85 works just fine.
 
 ![7](https://user-images.githubusercontent.com/41862477/49628891-bd765300-fa0c-11e8-914d-0dc3efb92176.JPG)
 
-> Following plot shows the effect of momentum on the test accuracy for the CIFAR10 data with ResNet56 architecture.
+> The plot shown above illustrates the effect of momentum on the test accuracy for the CIFAR10 data with ResNet56 architecture.
 
-*From the above plot we can see that decreasing the momentum while increasing the learning rate provides three benefits:*
+*Decreasing the momentum while increasing the learning rate provides three benefits:*
+- A lower test loss, 
+- Faster initial convergence, 
+- Greater convergence stability over a larger range of learning rate.
 
-*(1) A lower test loss, (2) Faster initial convergence, (3) Greater convergence stability over a larger range of learning rate.
-One more thing to note that decreasing the momentum and then increasing it is giving much better resulst compared to otherway round.*
+> *One more thing to note that decreasing the momentum and then increasing it is giving much better results compared to otherway round.*
 
 
 ### Weight Decay
