@@ -83,4 +83,6 @@ Using the knowledge of the dataset and architecture we can decide which values t
 
 > From the above plot we can see that weight decay of 1.8e-3 (bisecting the exponent once again b/w -0.5 & -1 i.e. 10^-0.75) allows us to use much larger learning rate, plus giving the minimum test loss compared to other values.
 
-*Now following this learning rate schedule with a well-defined procedure to do Grid-Search CV will give you better results with almost a reduction of 50% in the training iterations.   
+*Now following this learning rate schedule with a well-defined procedure to do Grid-Search CV will give you better results with almost a reduction of 50% in the training iterations.*
+
+**Thanks for going through this post. Any feedbacks are duly appreciated** 
