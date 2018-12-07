@@ -40,7 +40,7 @@ Moreover, the definition says regularization is any modification we make to a le
 ### Batch Size
 As we all know that small batch size induces regularization effects and others have also shown an optimal batch size on the order of 80 for Cifar-10, but contrary to previous work, the paper suggests using a larger batch size when using the "One-Cycle" policy. The batch capacity should only be limited because of memory constraints, not by anything else since larger batch sizes enable us to use larger learning rates. Although the benefits of larger batch sizes also taper off after some point and 512 seems to be a good choice. The left plot shows the effect of batch size on test accuracy while the right one on test loss.
 
-![6](https://user-images.githubusercontent.com/41862477/49629000-4e4d2e80-fa0d-11e8-8bd8-d778bfd80028.JPG)
+![6](https://user-images.githubusercontent.com/41862477/49629127-d7fcfc00-fa0d-11e8-9843-1466c31a2519.JPG)
 
 Here, we can observe that batch size of 1024 achieves the best test accuracy in the least number of training iterations compared to others. It is also interesting to contrast the test loss to the test accuracy. *Although larger batch sizes attain lower loss values early in the training, final loss values are least only for the smaller batch sizes, which is the complete opposite to that of accuracy results.*
 
