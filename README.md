@@ -85,4 +85,6 @@ Using the knowledge of the dataset and architecture we can decide which values t
 
 *Now following this learning rate schedule with a well-defined procedure to do Grid-Search CV will give you better results with almost a reduction of 50% in the training iterations.*
 
-**Thanks for going through this post. Any feedbacks are duly appreciated** 
+***
+
+***Thanks for going through this post! Any feedbacks are duly appreciated.***
