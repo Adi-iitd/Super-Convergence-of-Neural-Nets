@@ -37,9 +37,13 @@ To achieve super-convergence, we will use "One-Cycle" Learning Rate Policy which
 
 > The left plot shows the visualization of, how training transverses a loss function topology, whereas the right plot shows a close-up of the end of optimization.
 
+***
+
 ***Why does a large Learning rate act like a regularizer?***
 
-> The **LR Range test** shows evidence of regularization through results, which shows an increasing training loss and decreasing test loss while the learning rate increases from approximately 0.2 to 2.0 when training with the Cifar-10 dataset and a Resnet-56 architecture, which implies that regularization is happening while training with these large learning rates. Moreover, the definition says **regularization** is any modification we make to a learning algorithm that is intended to reduce its generalization error.
+The **LR Range test** shows evidence of regularization through results, which shows an increasing training loss and decreasing test loss while the learning rate increases from approximately 0.2 to 2.0 when training with the Cifar-10 dataset and a Resnet-56 architecture, which implies that regularization is happening while training with these large learning rates. Moreover, the definition says **regularization** is any modification we make to a learning algorithm that is intended to reduce its generalization error.
+
+***
 
 ### Batch Size
 As we all know that small batch size induces regularization effects and some have also shown an optimal batch size on the order of 80 for Cifar-10, but contrary to previous work, this paper suggests using a larger batch size when using the **One-Cycle** policy. The batch size should only be limited because of memory constraints, not by anything else since larger batch size enables us to use larger learning rate. Although, the benefits of larger batch sizes taper off after some point. 
@@ -69,11 +73,11 @@ The optimal training procedure is a combination of an increasing cyclical learni
 
 
 ### Weight Decay
-This one is the last important hyper-paramter that is worth discussing. The amount of regularization must be balanced for each dataset and architecture, and the value of weight decay is a key knob to tune regularization. This requires a grid search over few values to determine the optimal magnitude but usually does not require to search over more than one significant figure.
+This is the last important hyper-paramter that is worth discussing. The amount of regularization must be balanced for each dataset and architecture, and the value of weight decay is a key knob to tune regularization. This requires a grid search over few values to determine the optimal magnitude but usually does not require to search over more than one significant figure.
 
 Using the knowledge of the dataset and architecture we can decide which values to test. For example, a more complex dataset requires less regularization, so testing smaller weight decay values, such as 10−4, 10−5, 10−6, and 0 would suffice. A shallow architecture requires more regularization, so larger weight decay values are tested such as 10−2, 10−3, 10−4. In the grid search we often use values like 3.18e-4, and the reason behind choosing 3 rather than 5 is that a bisection of the exponent is taken into account rather than the bisection of the magnitude itself (i.e., between 10−4 and 10−3 one bisects as 10−3.5 = 3.16 × 10−4).
 
 ![8](https://user-images.githubusercontent.com/41862477/49628892-be0ee980-fa0c-11e8-96e3-42fae36254cc.JPG)
 
-From the above plot we can see that weight decay of 1.8e-3 (bisecting the exponent once again b/w -0.5 & -1 i.e. 10^-0.75) allows us to use much larger learning rate, plus giving the minimum test loss compared to other values.
+> From the above plot we can see that weight decay of 1.8e-3 (bisecting the exponent once again b/w -0.5 & -1 i.e. 10^-0.75) allows us to use much larger learning rate, plus giving the minimum test loss compared to other values.
 
