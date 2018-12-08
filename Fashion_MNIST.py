@@ -144,8 +144,8 @@ def get_dataset_iterators(sess):
 
     return handle, next_element, train_iterator, train_handle, val_iterator, val_handle, test_iterator, test_handle;
 
-def conv_2d(x, kernel_size = 3, stride = 1, out_channels = 64, is_conv = True, is_norm = True, normalization = 'batch', 
-            is_act = True, activation = 'relu', leak_param = 1/5.5):
+def conv_2d(x, kernel_size = 3, stride = 1, out_channels = 64, is_conv = True, is_norm = True, normalization = 'batch', is_act = True, 
+	    activation = 'relu', leak_param = 1/5.5):
   
     """
     Arguments:
@@ -166,8 +166,8 @@ def conv_2d(x, kernel_size = 3, stride = 1, out_channels = 64, is_conv = True, i
     
 #   Apply Convolution
     if is_conv:
-        x = tf.layers.conv2d(x, filters = out_channels, kernel_size = kernel_size, strides = stride, padding = 'SAME', 
-                             use_bias = False, kernel_initializer = tf.contrib.layers.xavier_initializer_conv2d())
+        x = tf.layers.conv2d(x, filters = out_channels, kernel_size = kernel_size, strides = stride, padding = 'SAME', use_bias = False,
+                             kernel_initializer = tf.contrib.layers.xavier_initializer_conv2d())
       
 #   Apply Normalization
     if is_norm:
@@ -209,7 +209,9 @@ def wide_resblk_1(inp_ten, stride = 2, in_channels = 16, widen_factor = 2, activ
       
 #       Two convolutional layers (first one can be optional stridden convolution) in the main path with a dropout layer in between them
         with tf.variable_scope("Conv1_layer"):
-            blk_1 = conv_2d(inp_ten, 3, stride, in_channels*widen_factor, activation = activation, normalization = normalization, leak_param = leak_param); 
+            blk_1 = conv_2d(inp_ten, 3, stride, in_channels*widen_factor, activation = activation, normalization = normalization, 
+			    leak_param = leak_param); 
+	
             blk_1 = tf.nn.dropout(blk_1, keep_prob = (1-dropout))
 
         with tf.variable_scope("Conv2_layer"):
@@ -254,7 +256,8 @@ def model(input_ten, init_out_channels = 64, normalization = 'batch', activation
     x:                 Output tensor 
     """
     
-#   Model architecture (1 conv -> 1 WR_blk_1 -> n WR_blk_2 -> 1 WR_blk_1 -> n WR_blk_2 -> 1 WR_blk_1 -> n WR_blk_2 -> Global_avg_pooling -> Dense) 
+#   Model architecture (1 conv -> 1 WR_blk_1 -> n WR_blk_2 -> 1 WR_blk_1 -> n WR_blk_2 -> 1 WR_blk_1 -> n WR_blk_2 -> 
+#   Global_avg_pooling -> Dense) 
 
     num_blocks = 0;
     with tf.variable_scope("Block_0"):
@@ -314,7 +317,8 @@ def training(loss, wt_dec):
         grads = tf.gradients(loss, tf.trainable_variables()); grads_and_vars = list(zip(grads, tf.trainable_variables()))
   
 #       initialize the optimizer
-        optimizer = tf.contrib.opt.MomentumWOptimizer(weight_decay = wt_dec, learning_rate = lr_ph, momentum = beta1_ph, use_nesterov = True)
+        optimizer = tf.contrib.opt.MomentumWOptimizer(weight_decay = wt_dec, learning_rate = lr_ph, momentum = beta1_ph, 
+						      use_nesterov = True)
   
 #       Don't apply weight decay to bias and batch_norm parameters
         var_list = [var for var in tf.trainable_variables() if ("batch_normalization" or "bias") not in var.name];
@@ -353,8 +357,10 @@ def initialize_model():
 #       Defining global variables that need to be passed within many functions 
         global X_ph, y_ph, lr_ph, beta1_ph, train_mode, dropout;
         X_ph = tf.placeholder(dtype = tf.float32, shape = [None,  img_height, img_width, img_channels], name = "Input_features"); 
-        y_ph = tf.placeholder(dtype = tf.float32, shape = [None, 10], name = "Input_Labels"); dropout = tf.placeholder(dtype = tf.float32, name = "Dropout"); 
-        lr_ph = tf.placeholder(dtype = tf.float32, name = "Learning_rate"); train_mode = tf.placeholder(dtype = tf.bool, name = 'Train_Mode_BN');  
+        y_ph = tf.placeholder(dtype = tf.float32, shape = [None, 10], name = "Input_Labels"); 
+	dropout = tf.placeholder(dtype = tf.float32, name = "Dropout"); 
+        lr_ph = tf.placeholder(dtype = tf.float32, name = "Learning_rate"); 
+	train_mode = tf.placeholder(dtype = tf.bool, name = 'Train_Mode_BN');  
         beta1_ph = tf.placeholder(shape = [], dtype = tf.float32);
         
 #   compute logits, loss and accuracy
@@ -395,7 +401,8 @@ def plot_graph(learning_rate_collection, val_loss_collection, name, color):
     """
     
     pylab.plot(val_loss_collection[:len(learning_rate_collection)], color, label = name);
-    plt.xticks(range(len(learning_rate_collection)), np.around(np.log10(learning_rate_collection), decimals = 2)); pylab.legend(loc = 'upper left');
+    plt.xticks(range(len(learning_rate_collection)), np.around(np.log10(learning_rate_collection), decimals = 2)); 
+    pylab.legend(loc = 'upper left');
   
   
 def lr_mom_calculator(num_epochs, max_lr, min_lr = None, train = False):  
@@ -413,11 +420,13 @@ def lr_mom_calculator(num_epochs, max_lr, min_lr = None, train = False):
     momentum_collection:      Linear(Decr -> Incr) Momentum collection
     """
     
-    tot_iters = int(num_epochs*num_train_iters); learning_rate_collection = np.zeros(tot_iters + 1); momentum_collection = np.zeros(tot_iters + 1);
+    tot_iters = int(num_epochs*num_train_iters); learning_rate_collection = np.zeros(tot_iters + 1); 
+    momentum_collection = np.zeros(tot_iters + 1); 
     if min_lr == None: min_lr = max_lr/20;
 
 #   In last few epochs, decaying the minimum learning rate by several orders of magnitude
-    thresh = min_lr/1000; max_mom = 0.95; min_mom = 0.85; num_iters_2 = int(num_epochs*num_train_iters/10); num_iters_1 = (tot_iters - num_iters_2)//2;
+    thresh = min_lr/1000; max_mom = 0.95; min_mom = 0.85; num_iters_2 = int(num_epochs*num_train_iters/10); 
+    num_iters_1 = (tot_iters - num_iters_2)//2;
     
 #   Increase the learning rate and decrease the momentum in the first part of the training
     for ind in range(num_iters_1):
@@ -438,8 +447,8 @@ def lr_mom_calculator(num_epochs, max_lr, min_lr = None, train = False):
     if not train: return learning_rate_collection[: num_iters_1], momentum_collection[: num_iters_1];
     else: return learning_rate_collection, momentum_collection
 
-def Lr_finder(epochs = 10, min_lr = 1e-5, max_lr = 10, params = ['Lr_finder'], fin_wt_dec = 0, fin_dropout = 0, vanilla = False, wt_dec_gridsearch = False, 
-			        dropout_gridsearch = False):
+def Lr_finder(epochs = 10, min_lr = 1e-5, max_lr = 10, params = ['Lr_finder'], fin_wt_dec = 0, fin_dropout = 0, vanilla = False, 
+	      wt_dec_gridsearch = False, dropout_gridsearch = False):
     
     """
     Arguments:
@@ -502,7 +511,9 @@ def Lr_finder(epochs = 10, min_lr = 1e-5, max_lr = 10, params = ['Lr_finder'], f
                             try: X_val_batch, y_val_batch = sess.run(next_element, feed_dict = {handle: val_handle}); 
                             except tf.errors.OutOfRangeError: sess.run(val_iter.initializer);
 
-                            val_loss, val_acc = sess.run([loss, accuracy], feed_dict = {X_ph: X_val_batch, y_ph: y_val_batch, train_mode: False, dropout: 0});
+                            val_loss, val_acc = sess.run([loss, accuracy], feed_dict = {X_ph: X_val_batch, y_ph: y_val_batch, 
+											train_mode: False, dropout: 0});
+			
                             tot_val_loss += val_loss; tot_val_acc += val_acc;
             
                         val_acc_collection.append(tot_val_acc/(num_val_iters + 1)); learning_rate_collection.append(curr_lr); 
