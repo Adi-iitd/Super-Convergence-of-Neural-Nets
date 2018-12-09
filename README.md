@@ -93,22 +93,23 @@ Using the knowledge of the dataset and architecture we can decide which values t
 
 > ***Histogram and Distribution plot of the weights of the first layer (to check **Vanishing gradient** problems)***
 
-![1](https://user-images.githubusercontent.com/41862477/49699358-31278400-fbf6-11e8-9d14-c02ead7397a4.JPG)
-![1 1](https://user-images.githubusercontent.com/41862477/49699359-31c01a80-fbf6-11e8-99bd-b431cf6db7da.JPG)
+![1](https://user-images.githubusercontent.com/41862477/49699692-5b7b4080-fbfa-11e8-96a1-74cd24e7707a.JPG)
+![1 1](https://user-images.githubusercontent.com/41862477/49699693-5cac6d80-fbfa-11e8-8947-2e08be9af8a9.JPG)
 
 > ***Histogram and Distribution plot of the weights of the last layer***
 
-![2](https://user-images.githubusercontent.com/41862477/49699360-31c01a80-fbf6-11e8-8add-b6a0ea85c8a2.JPG)
-![2 1](https://user-images.githubusercontent.com/41862477/49699361-31c01a80-fbf6-11e8-96ad-8cf3b0d0b7ca.JPG)
+![2](https://user-images.githubusercontent.com/41862477/49699694-5d450400-fbfa-11e8-9dff-a3933200ffc4.JPG)
+![2 1](https://user-images.githubusercontent.com/41862477/49699695-5d450400-fbfa-11e8-93a1-dfe7990857d8.JPG)
 
 > ***Architecture Used: WideResBlk Type 1 & WideResBlk Type 2***
 
-![3](https://user-images.githubusercontent.com/41862477/49699362-3258b100-fbf6-11e8-9c47-4c2d66f2a3eb.JPG)
-![4](https://user-images.githubusercontent.com/41862477/49699363-3258b100-fbf6-11e8-876f-8916d86b80c7.JPG)
+![3](https://user-images.githubusercontent.com/41862477/49699696-5e763100-fbfa-11e8-8228-9374236d7361.JPG)
+![4](https://user-images.githubusercontent.com/41862477/49699697-5e763100-fbfa-11e8-9044-de121f246e90.JPG)
 
 > ***Accuracy***
 
-![5](https://user-images.githubusercontent.com/41862477/49699499-0b02e380-fbf8-11e8-83aa-189007e02ad0.JPG)
+
+![5](https://user-images.githubusercontent.com/41862477/49699609-39cd8980-fbf9-11e8-85eb-0a8a9249511f.JPG)
 
 > ***LR Range Test***
 
