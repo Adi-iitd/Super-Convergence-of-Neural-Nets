@@ -112,15 +112,15 @@ Using the knowledge of the dataset and architecture we can decide which values t
 
 > ***LR Range Test***
 
-![6](https://user-images.githubusercontent.com/41862477/49699365-3258b100-fbf6-11e8-8789-f60fba38ed9e.JPG)
+![6](https://user-images.githubusercontent.com/41862477/49699588-0ee33580-fbf9-11e8-83db-80d8c7ea3b3d.JPG)
 
 > ***GridSearchCV for Weight Decay value***
 
-![7](https://user-images.githubusercontent.com/41862477/49699366-32f14780-fbf6-11e8-8a57-88509a33a7c8.JPG)
+![7](https://user-images.githubusercontent.com/41862477/49699589-0f7bcc00-fbf9-11e8-923a-50330d096d78.JPG)
 
 > ***GridSearchCV for Dropout value***
 
-![8](https://user-images.githubusercontent.com/41862477/49699367-32f14780-fbf6-11e8-9d87-af9ebe9aad7f.JPG)
+![8](https://user-images.githubusercontent.com/41862477/49699560-a09e7300-fbf8-11e8-967b-3a8c92916ee2.JPG)
 
 ***
 
