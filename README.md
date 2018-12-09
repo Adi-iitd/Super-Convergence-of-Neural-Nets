@@ -92,12 +92,20 @@ Using the knowledge of the dataset and architecture we can decide which values t
 **The results shown below are for FMNIST dataset trained using techniques discussed above:**
 
 > *Histogram and Distribution plot of the weights of the first layer (to check **Vanishing gradient** problems)*
-![1](https://user-images.githubusercontent.com/41862477/49699314-87e08e00-fbf5-11e8-96b4-86748b1baeed.JPG)
-![1 1](https://user-images.githubusercontent.com/41862477/49699315-87e08e00-fbf5-11e8-98a6-510ef5392439.JPG)
+![1](https://user-images.githubusercontent.com/41862477/49699358-31278400-fbf6-11e8-9d14-c02ead7397a4.JPG)
+![1 1](https://user-images.githubusercontent.com/41862477/49699359-31c01a80-fbf6-11e8-99bd-b431cf6db7da.JPG)
 
 > *Histogram and Distribution plot of the weights of the last layer*
-![2](https://user-images.githubusercontent.com/41862477/49699277-333d1300-fbf5-11e8-95ea-f42f0913e1ae.JPG)
-![2 1](https://user-images.githubusercontent.com/41862477/49699278-33d5a980-fbf5-11e8-9d9b-162242d16111.JPG)
+![2](https://user-images.githubusercontent.com/41862477/49699360-31c01a80-fbf6-11e8-8add-b6a0ea85c8a2.JPG)
+![2 1](https://user-images.githubusercontent.com/41862477/49699361-31c01a80-fbf6-11e8-96ad-8cf3b0d0b7ca.JPG)
+
+> *Architecture*
+**Wide_Res_Blk_1 & Wide_Res_Blk_1**
+![3](https://user-images.githubusercontent.com/41862477/49699362-3258b100-fbf6-11e8-9c47-4c2d66f2a3eb.JPG)
+![4](https://user-images.githubusercontent.com/41862477/49699363-3258b100-fbf6-11e8-876f-8916d86b80c7.JPG)
+
+
+
 
 > *
 
