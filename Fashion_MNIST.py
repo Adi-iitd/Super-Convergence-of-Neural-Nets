@@ -318,7 +318,8 @@ def training(loss, wt_dec):
         grads = tf.gradients(loss, tf.trainable_variables()); grads_and_vars = list(zip(grads, tf.trainable_variables()))
   
 #       initialize the optimizer
-        optimizer = tf.contrib.opt.MomentumWOptimizer(weight_decay = wt_dec, learning_rate = lr_ph, momentum = beta1_ph, use_nesterov = True)
+        optimizer = tf.contrib.opt.MomentumWOptimizer(weight_decay = wt_dec, learning_rate = lr_ph, momentum = beta1_ph, 
+						      use_nesterov = True)
   
 #       Don't apply weight decay to bias and batch_norm parameters
         var_list = [var for var in tf.trainable_variables() if ("batch_normalization" or "bias") not in var.name];
@@ -503,7 +504,7 @@ def Lr_finder(epochs = 10, min_lr = 1e-5, max_lr = 10, params = ['Lr_finder'], f
                     
 #                   Run the training step to update the parameters and collect loss and acc values
                     _, train_loss, train_acc = sess.run([train_step, loss, accuracy], feed_dict = {X_ph: X_train_batch, y_ph: y_train_batch, 
-                                                                lr_ph: curr_lr, train_mode: True, beta1_ph: curr_beta1, dropout: drop_prob})
+                                                         lr_ph: curr_lr, train_mode: True, beta1_ph: curr_beta1, dropout: drop_prob})
   
 #                   Evaluate the trained model on eval set after every certain number of iterations
                     if ptr % 25 == 0:
@@ -514,8 +515,8 @@ def Lr_finder(epochs = 10, min_lr = 1e-5, max_lr = 10, params = ['Lr_finder'], f
                             try: X_val_batch, y_val_batch = sess.run(next_element, feed_dict = {handle: val_handle}); 
                             except tf.errors.OutOfRangeError: sess.run(val_iter.initializer);
 
-                            val_loss, val_acc = sess.run([loss, accuracy], feed_dict = {X_ph: X_val_batch, y_ph: y_val_batch, train_mode: False,
-                                                                                        dropout: 0});
+                            val_loss, val_acc = sess.run([loss, accuracy], feed_dict = {X_ph: X_val_batch, y_ph: y_val_batch, 
+											train_mode: False, dropout: 0});
           
                             tot_val_loss += val_loss; tot_val_acc += val_acc;
             
@@ -590,8 +591,8 @@ def train(num_epochs):
               
 #                   Run the training step to update the parameters
                     _, train_loss, train_acc = sess.run([train_step, loss, acc], feed_dict = {X_ph: X_train_batch, y_ph: y_train_batch,
-                                                        train_mode: True, dropout: 0.15, lr_ph: lr_coll[(epoch-1)*num_train_iters + train_ptr], 
-                                                        beta1_ph: mom_coll[(epoch-1)*num_train_iters + train_ptr]})
+                                               train_mode: True, dropout: 0.15, lr_ph: lr_coll[(epoch-1)*num_train_iters + train_ptr], 
+                                               beta1_ph: mom_coll[(epoch-1)*num_train_iters + train_ptr]})
   
                     tot_train_loss += train_loss; tot_train_acc += train_acc;
     
