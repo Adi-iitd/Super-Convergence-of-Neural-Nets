@@ -89,7 +89,7 @@ Using the knowledge of the dataset and architecture we can decide which values t
 
 ## Result
 
-**The results shown below are for FMNIST dataset trained using techniques discussed above:**
+**The results shown below are for FMNIST dataset trained using techniques discussed above: (95%  Test Accuracy in 75 Epochs)**
 
 > ***Histogram and Distribution plot of the weights of the first layer (to check **Vanishing gradient** problems)***
 
