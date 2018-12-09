@@ -108,7 +108,7 @@ Using the knowledge of the dataset and architecture we can decide which values t
 
 > ***Accuracy***
 
-![5](https://user-images.githubusercontent.com/41862477/49699364-3258b100-fbf6-11e8-880c-0357b3b31fc3.JPG)
+![5](https://user-images.githubusercontent.com/41862477/49699499-0b02e380-fbf8-11e8-83aa-189007e02ad0.JPG)
 
 > ***LR Range Test***
 
