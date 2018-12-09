@@ -91,28 +91,37 @@ Using the knowledge of the dataset and architecture we can decide which values t
 
 **The results shown below are for FMNIST dataset trained using techniques discussed above:**
 
-> *Histogram and Distribution plot of the weights of the first layer (to check **Vanishing gradient** problems)*
+> ***Histogram and Distribution plot of the weights of the first layer (to check **Vanishing gradient** problems)***
 
 ![1](https://user-images.githubusercontent.com/41862477/49699358-31278400-fbf6-11e8-9d14-c02ead7397a4.JPG)
 ![1 1](https://user-images.githubusercontent.com/41862477/49699359-31c01a80-fbf6-11e8-99bd-b431cf6db7da.JPG)
 
-> *Histogram and Distribution plot of the weights of the last layer*
+> ***Histogram and Distribution plot of the weights of the last layer***
 
 ![2](https://user-images.githubusercontent.com/41862477/49699360-31c01a80-fbf6-11e8-8add-b6a0ea85c8a2.JPG)
 ![2 1](https://user-images.githubusercontent.com/41862477/49699361-31c01a80-fbf6-11e8-96ad-8cf3b0d0b7ca.JPG)
 
-> *Architecture*
-**Wide_Res_Blk_1 & Wide_Res_Blk_1**
+> ***Architecture Used: WideResBlk Type 1 & WideResBlk Type 2***
 
 ![3](https://user-images.githubusercontent.com/41862477/49699362-3258b100-fbf6-11e8-9c47-4c2d66f2a3eb.JPG)
 ![4](https://user-images.githubusercontent.com/41862477/49699363-3258b100-fbf6-11e8-876f-8916d86b80c7.JPG)
 
+> ***Accuracy***
 
+![5](https://user-images.githubusercontent.com/41862477/49699364-3258b100-fbf6-11e8-880c-0357b3b31fc3.JPG)
 
+> ***LR Range Test***
 
-> *
+![6](https://user-images.githubusercontent.com/41862477/49699365-3258b100-fbf6-11e8-8789-f60fba38ed9e.JPG)
 
+> ***GridSearchCV for Weight Decay value***
 
+![7](https://user-images.githubusercontent.com/41862477/49699366-32f14780-fbf6-11e8-8a57-88509a33a7c8.JPG)
 
+> ***GridSearchCV for Dropout value***
+
+![8](https://user-images.githubusercontent.com/41862477/49699367-32f14780-fbf6-11e8-9d87-af9ebe9aad7f.JPG)
+
+***
 
 ***Thanks for going through this post! Any feedbacks are duly appreciated.***
