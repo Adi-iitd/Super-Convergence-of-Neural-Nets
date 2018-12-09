@@ -16,12 +16,17 @@ from matplotlib import pyplot as plt; import pylab; import cv2;
 # Suppress the irrelevant warnings
 import warnings; warnings.filterwarnings("ignore");
 
-batch_sz = 512; lab_bin = LabelBinarizer(); log_path = "FMNIST/"; colors = ['r', 'g', 'b', 'k', 'y', 'm', 'c'];
+batch_sz = 512; lab_bin = LabelBinarizer(); log_path = "log_path/"; colors = ['r', 'g', 'b', 'k', 'y', 'm', 'c'];
 
 # Make the directory if it doesn't exists
 if not os.path.exists(log_path): os.makedirs(log_path); 
 
 # Load the train and test data and do the 0-1 scaling
+"""
+Simply replace the name of dataset in the next line. This python file is trained on FMNIST dataset.
+If you want to train it on CIFAR10, replace fashion_mnist by cifar10. For eg:
+data_ld = tf.keras.datasets.cifar10; That's it, nothing more!!
+"""
 data_ld = tf.keras.datasets.fashion_mnist; (X_train_val, y_train_val), (X_test, y_test) = data_ld.load_data();
 img_height = X_test.shape[1]; img_width = X_test.shape[2]; img_channels = 1 if len(X_test.shape) == 3 else 3; 
 
