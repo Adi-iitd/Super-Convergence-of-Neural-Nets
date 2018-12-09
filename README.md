@@ -92,8 +92,8 @@ Using the knowledge of the dataset and architecture we can decide which values t
 **The results shown below are for FMNIST dataset trained using techniques discussed above:**
 
 > *Histogram and Distribution plot of the weights of the first layer (to check **Vanishing gradient** problems)*
-![1](https://user-images.githubusercontent.com/41862477/49699275-32a47c80-fbf5-11e8-83b2-e88ba63a141f.JPG)
-![1 1](https://user-images.githubusercontent.com/41862477/49699276-333d1300-fbf5-11e8-991d-33051bd391f3.JPG)
+![1](https://user-images.githubusercontent.com/41862477/49699314-87e08e00-fbf5-11e8-96b4-86748b1baeed.JPG)
+![1 1](https://user-images.githubusercontent.com/41862477/49699315-87e08e00-fbf5-11e8-98a6-510ef5392439.JPG)
 
 > *Histogram and Distribution plot of the weights of the last layer*
 ![2](https://user-images.githubusercontent.com/41862477/49699277-333d1300-fbf5-11e8-95ea-f42f0913e1ae.JPG)
