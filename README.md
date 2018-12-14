@@ -106,7 +106,7 @@ Using the knowledge of the dataset and architecture we can decide which values t
 ![3](https://user-images.githubusercontent.com/41862477/49699696-5e763100-fbfa-11e8-8228-9374236d7361.JPG)
 ![4](https://user-images.githubusercontent.com/41862477/49699697-5e763100-fbfa-11e8-9044-de121f246e90.JPG)
 
-> ***Accuracy***                                                       ***Loss***
+> ***Accuracy and Loss*** *(Blue: Validation data, Red: Train data)*
 
 ![1](https://user-images.githubusercontent.com/41862477/50004437-27729780-ffcd-11e8-963f-bf0f78bf771d.jpg)
 ![2](https://user-images.githubusercontent.com/41862477/50004438-27729780-ffcd-11e8-94bc-ed0d9f98d5f3.jpg)
@@ -115,7 +115,7 @@ Using the knowledge of the dataset and architecture we can decide which values t
 
 ![3](https://user-images.githubusercontent.com/41862477/50004440-280b2e00-ffcd-11e8-9cc4-77e6ee21e912.jpg)
 
-> ***GridSearchCV for Weight Decay value***        ***GridSearchCV for Dropout value***
+> ***GridSearchCV for Weight Decay and Dropout*** *(Blue: Validation data, Red: Train data)*
 
 ![4](https://user-images.githubusercontent.com/41862477/50004441-280b2e00-ffcd-11e8-942b-9c8612f9121a.jpg)
 ![5](https://user-images.githubusercontent.com/41862477/50004442-280b2e00-ffcd-11e8-9e1e-c77a0574d3d3.jpg)
