@@ -108,20 +108,23 @@ Using the knowledge of the dataset and architecture we can decide which values t
 
 > ***Accuracy***
 
+![1](https://user-images.githubusercontent.com/41862477/49998022-2d5e7d80-ffb9-11e8-8df6-516d5f7a933d.jpg)
 
-![5](https://user-images.githubusercontent.com/41862477/49699609-39cd8980-fbf9-11e8-85eb-0a8a9249511f.JPG)
+> ***Loss***
+
+![2](https://user-images.githubusercontent.com/41862477/49998024-2d5e7d80-ffb9-11e8-9fb7-004c69a65dcf.jpg)
 
 > ***LR Range Test***
 
-![6](https://user-images.githubusercontent.com/41862477/49699588-0ee33580-fbf9-11e8-83db-80d8c7ea3b3d.JPG)
+![3](https://user-images.githubusercontent.com/41862477/49998025-2df71400-ffb9-11e8-939d-23b655d1760e.jpg)
 
 > ***GridSearchCV for Weight Decay value***
 
-![7](https://user-images.githubusercontent.com/41862477/49699589-0f7bcc00-fbf9-11e8-923a-50330d096d78.JPG)
+![4](https://user-images.githubusercontent.com/41862477/49998026-2df71400-ffb9-11e8-96b7-9b5f7a6c72e5.jpg)
 
 > ***GridSearchCV for Dropout value***
 
-![8](https://user-images.githubusercontent.com/41862477/49699560-a09e7300-fbf8-11e8-967b-3a8c92916ee2.JPG)
+![5](https://user-images.githubusercontent.com/41862477/49998027-2df71400-ffb9-11e8-989c-066ba53003f1.jpg)
 
 ***
 
