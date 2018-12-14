@@ -108,8 +108,8 @@ Using the knowledge of the dataset and architecture we can decide which values t
 
 > ***Accuracy and Loss*** *(Blue: Validation data, Red: Train data)*
 
-![1](https://user-images.githubusercontent.com/41862477/50004437-27729780-ffcd-11e8-963f-bf0f78bf771d.jpg)
-![2](https://user-images.githubusercontent.com/41862477/50004438-27729780-ffcd-11e8-94bc-ed0d9f98d5f3.jpg)
+![1](https://user-images.githubusercontent.com/41862477/50004721-16765600-ffce-11e8-87e9-3b0982b7022a.jpg)
+![2](https://user-images.githubusercontent.com/41862477/50004722-16765600-ffce-11e8-8a32-356fa2701d5f.jpg)
 
 > ***LR Range Test***
 
