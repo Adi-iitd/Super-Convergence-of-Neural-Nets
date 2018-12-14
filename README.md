@@ -113,13 +113,12 @@ Using the knowledge of the dataset and architecture we can decide which values t
 
 > ***LR Range Test***
 
-![3](https://user-images.githubusercontent.com/41862477/50004440-280b2e00-ffcd-11e8-9cc4-77e6ee21e912.jpg)
+![5](https://user-images.githubusercontent.com/41862477/50004442-280b2e00-ffcd-11e8-9e1e-c77a0574d3d3.jpg)
 
 > ***GridSearchCV for Weight Decay and Dropout*** *(Blue: Validation data, Red: Train data)*
 
 ![4](https://user-images.githubusercontent.com/41862477/50004441-280b2e00-ffcd-11e8-942b-9c8612f9121a.jpg)
-![5](https://user-images.githubusercontent.com/41862477/50004442-280b2e00-ffcd-11e8-9e1e-c77a0574d3d3.jpg)
-
+![3](https://user-images.githubusercontent.com/41862477/50004440-280b2e00-ffcd-11e8-9cc4-77e6ee21e912.jpg)
 ***
 
 ***Thanks for going through this post! Any feedbacks are duly appreciated.***
