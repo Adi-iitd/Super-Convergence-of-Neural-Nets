@@ -470,17 +470,16 @@ def Lr_finder(epochs = 10, min_lr = 1e-5, max_lr = 10, params = ['Lr_finder'], f
     """
     
 #   Get the learning rate collection corresponding to the first part of the training
-    plt.figure(figsize = (20, 10)); epochs = epochs*2;
-    for ind, val in enumerate(params):
+
+    g_lr_finder = tf.get_default_graph();
+    with g_lr_finder.as_default():    
         
-        g_lr_finder = tf.get_default_graph();
-        with g_lr_finder.as_default():
-      
-            tf.set_random_seed(42); 
-            with tf.Session(graph = g_lr_finder) as sess:
-            
-#               Initialize the model
-                logits, loss, accuracy = initialize_model();
+        plt.figure(figsize = (20, 10)); epochs = epochs*2; tf.set_random_seed(42); 
+        with tf.Session(graph = g_lr_finder) as sess:
+          
+#           Initialize the model
+            logits, loss, accuracy = initialize_model();
+            for ind, val in enumerate(params):
   
 #               Run Grid_Search for wt_dec values if boolean wt_dec_gridsearch is true 
                 if wt_dec_gridsearch: print('Grid_Search statrted corresponding to wt_dec: ' + str(val)); train_step = training(loss, val);
@@ -561,23 +560,22 @@ def train(num_epochs):
 #   Define a graph and set it to default one 
     g_train = tf.get_default_graph();
     with g_train.as_default():
+      
+        tf.set_random_seed(42);
+#       Initialize the model and the variables whose statistics are to be plotted
+        logits, loss, acc = initialize_model(); tf.summary.scalar("Loss", loss); tf.summary.scalar("Accuracy", acc); 
 
 #       Define a Session
         with tf.Session(graph = g_train) as sess:
-
-            tf.set_random_seed(42);
-      
-#           Initialize the model and the variables whose statistics are to be plotted
-            logits, loss, acc = initialize_model(); tf.summary.scalar("Loss", loss); tf.summary.scalar("Accuracy", acc); 
-            
 #           Define the training step and iterators over the dataset
             train_step = training(loss, 1e-4);
             handle, next_element, train_iter, train_handle, val_iter, val_handle, test_iter, test_handle = get_dataset_iterators(sess); 
-            sess.run([tf.global_variables_initializer()]); lr_coll, mom_coll = lr_mom_calculator(num_epochs, 1, 5e-2, True); 
+            lr_coll, mom_coll = lr_mom_calculator(num_epochs, 1, 5e-2, True);
       
 #           Define the saver and writer which will be writing the logs at the specified location (again for Tensorboard) 
-            saver = tf.train.Saver(max_to_keep = 10); 
-            merged = tf.summary.merge_all(); writer = tf.summary.FileWriter(log_path, sess.graph)
+            saver = tf.train.Saver(max_to_keep = 5); merged = tf.summary.merge_all();
+            train_writer = tf.summary.FileWriter(log_path + "train/", sess.graph); 
+            val_writer = tf.summary.FileWriter(log_path + "val/"); sess.run([tf.global_variables_initializer()]); 
 
             print('Training statrted...');
 
@@ -591,12 +589,14 @@ def train(num_epochs):
                     except tf.errors.OutOfRangeError: sess.run(train_iter.initializer)  
               
 #                   Run the training step to update the parameters
-                    _, train_loss, train_acc = sess.run([train_step, loss, acc], feed_dict = {X_ph: X_train_batch, y_ph: y_train_batch,
-                                                         train_mode: True, dropout: 0.15, lr_ph: lr_coll[(epoch-1)*num_train_iters + train_ptr], 
-                                                         beta1_ph: mom_coll[(epoch-1)*num_train_iters + train_ptr]})
+                    _, train_loss, train_acc, summary = sess.run([train_step, loss, acc, merged], feed_dict = {X_ph: X_train_batch, 
+                                                                  y_ph: y_train_batch, train_mode: True, dropout: 0.15, 
+                                                                  lr_ph: lr_coll[(epoch-1)*num_train_iters + train_ptr], 
+                                                                  beta1_ph: mom_coll[(epoch-1)*num_train_iters + train_ptr]})
   
                     tot_train_loss += train_loss; tot_train_acc += train_acc;
-    
+                train_writer.add_summary(summary, epoch);          
+      
 #               Evaluate the trained model on eval set if the condition is satisfied
                 sess.run(val_iter.initializer); tot_val_loss = 0; tot_val_acc = 0;
                 for val_ptr in range(num_val_iters + 1):
@@ -608,16 +608,15 @@ def train(num_epochs):
                                                                                             train_mode: False, dropout: 0})
                 
                     tot_val_loss += val_loss; tot_val_acc += val_acc; 
+                val_writer.add_summary(summary, epoch);
                 
-                writer.add_summary(summary, epoch);
                 print(str(epoch) + ' Epochs:: Train_loss: ' + str(tot_train_loss/(num_train_iters + 1)) + ', Val_loss: ' + \
                       str(tot_val_loss/(num_val_iters + 1)) + ', Train_acc: ' + str((tot_train_acc/(num_train_iters + 1))*100) \
                       + '%, Val_acc: ' + str(tot_val_acc/(num_val_iters + 1)*100) + '%')
 
 #               Evaluate the trained model on the test set after every 5 epochs
-#               NOTE: This is not introducing any leakage of statistics from train/Val set into the test set by any means, just 
-#                     evaluating it on the test set after every 5 epochs to have a rough idea of what's going on.
-
+#               NOTE: This is not introducing any leakage of statistics from train/Val set into the test set by any means, just evaluating 
+#                     it on the test set after every 5 epochs to have a rough idea of what's going on.
                 if epoch % 5 == 0:	
     
                     sess.run(test_iter.initializer); tot_test_loss = 0; tot_test_acc = 0;
@@ -638,6 +637,3 @@ def train(num_epochs):
         sess.close();  """ Close the Session """
       
     tf.reset_default_graph();  """ Reset the default graph """
-
-# Train the model for n number of epochs!
-tf.reset_default_graph(); train(75);
