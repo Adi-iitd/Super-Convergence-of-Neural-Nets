@@ -1,5 +1,6 @@
 # [Super-Convergence: Very Fast Training of Residual Networks Using Large Learning Rates](https://openreview.net/forum?id=H1A5ztj3b)
 
+
 ## Abstract: 
 
 <p align = "justify"> This post provides an overview of a phenomenon called "Super Convergence" where we can train a deep neural network in order of magnitude faster compared to conventional training methods. One of the key elements is training the network using "One-cycle policy" with maximum possible learning rate. </p>
