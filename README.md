@@ -89,40 +89,4 @@
 
 <p align = "justify"> <i> Now following this learning rate schedule with a well-defined procedure to do Grid-Search CV will give you better results with almost a reduction of 50% in the training iterations. </i> </p>
 
-***
-
-## Result
-
-<p align = "justify"> <b> The results shown below are for FMNIST dataset trained using techniques discussed above: (95.1%  Test Accuracy in 75 Epochs) </b> </p>
-
-> ***Histogram and Distribution plot of the weights of the first layer (to check **Vanishing gradient** problems)***
-
-![1](https://user-images.githubusercontent.com/41862477/49699692-5b7b4080-fbfa-11e8-96a1-74cd24e7707a.JPG)
-![1 1](https://user-images.githubusercontent.com/41862477/49699693-5cac6d80-fbfa-11e8-8947-2e08be9af8a9.JPG)
-
-> ***Histogram and Distribution plot of the weights of the last layer***
-
-![2](https://user-images.githubusercontent.com/41862477/49699694-5d450400-fbfa-11e8-9dff-a3933200ffc4.JPG)
-![2 1](https://user-images.githubusercontent.com/41862477/49699695-5d450400-fbfa-11e8-93a1-dfe7990857d8.JPG)
-
-> ***Architecture Used: WideResBlk Type 1 & WideResBlk Type 2***
-
-![3](https://user-images.githubusercontent.com/41862477/49699696-5e763100-fbfa-11e8-8228-9374236d7361.JPG)
-![4](https://user-images.githubusercontent.com/41862477/49699697-5e763100-fbfa-11e8-9044-de121f246e90.JPG)
-
-> ***Accuracy and Loss*** *(Blue: Validation data, Red: Train data)*
-
-![1](https://user-images.githubusercontent.com/41862477/50004721-16765600-ffce-11e8-87e9-3b0982b7022a.jpg)
-![2](https://user-images.githubusercontent.com/41862477/50004722-16765600-ffce-11e8-8a32-356fa2701d5f.jpg)
-
-> ***LR Range Test***
-
-![5](https://user-images.githubusercontent.com/41862477/50004442-280b2e00-ffcd-11e8-9e1e-c77a0574d3d3.jpg)
-
-> ***GridSearchCV for Weight Decay and Dropout*** *(Blue: Validation data, Red: Train data)*
-
-![4](https://user-images.githubusercontent.com/41862477/50004441-280b2e00-ffcd-11e8-942b-9c8612f9121a.jpg)
-![3](https://user-images.githubusercontent.com/41862477/50004440-280b2e00-ffcd-11e8-9cc4-77e6ee21e912.jpg)
-***
-
 ***Thanks for going through this post! Any feedbacks are duly appreciated.***
