@@ -1,4 +1,4 @@
-# Super-Convergence: Very Fast Training of Neural Networks Using Large Learning Rates
+# [Super-Convergence: Very Fast Training of Residual Networks Using Large Learning Rates](https://openreview.net/forum?id=H1A5ztj3b)
 
 ## Abstract: 
 
