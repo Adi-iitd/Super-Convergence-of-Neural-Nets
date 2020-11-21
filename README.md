@@ -1,4 +1,4 @@
-# [Super-Convergence: Very Fast Training of Residual Networks Using Large Learning Rates](https://openreview.net/forum?id=H1A5ztj3b); [Medium Article](https://towardsdatascience.com/https-medium-com-super-convergence-very-fast-training-of-neural-networks-using-large-learning-rates-decb689b9eb0?source=---------2------------------)
+## [Super-Convergence: Very Fast Training of Residual Networks Using Large Learning Rates](https://openreview.net/forum?id=H1A5ztj3b) - [Medium Article](https://towardsdatascience.com/https-medium-com-super-convergence-very-fast-training-of-neural-networks-using-large-learning-rates-decb689b9eb0?source=---------2------------------)
 
 ## Abstract: 
 
